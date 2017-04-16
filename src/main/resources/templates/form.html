@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet"></link>
+    <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
+    <link href="http://phonewe.freeiz.com/CGI/main.css" rel="stylesheet"></link>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Hambaarst</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Registreeru</a></li>
+            <li><a href="/results">Broneeritud ajad</a></li>
+        </ul>
+        <div class="input-group col-sm-4 pull-right search_wrapper_top">
+            <input type="text" class="form-control searchbox" placeholder="Otsi hambaarsti" th:value="${dentistName}"></input>
+            <div class="input-group-btn">
+                <button class="btn btn-default searchbtn" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <form action="#" th:action="@{/}" th:object="${dentistVisitDTO}" method="post">
+                    <table>
+                        <tr>
+                            <td><p th:text="#{arsti.nimi}">arsti.nimi</p></td>
+                            <td><input type="text" id="dentistName" name="dentistName" class="form-control standard-input"/></td>
+                            <td>
+                                <select class="form-control standard-input" id="selectDentist">
+                                    <option value="">Vali hambaarst</option>
+                                    <option th:each="dentist : ${dentistList}"
+                                            th:value="${dentist}" th:text="${dentist}">Hambaarsti nimi</option>
+                                </select>
+                            </td>
+                            <td th:if="${#fields.hasErrors('dentistName')}" th:errors="*{dentistName}" id="name-error">Nime viga</td>
+                        </tr>
+                        <tr>
+                            <td><p th:text="#{visiidi.kuupaev}">visiidi.kuupaev</p></td>
+                            <td>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type="text" class="form-control standard-input" th:field="*{visitTime}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}" id="date-time-error">Kuupäeva viga</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <button type="submit" class="btn" th:text="#{registreeri.visiidile}"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="/">Tagasi pealehele...</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="snackbar"></div>
+</body>
+<script src="http://phonewe.freeiz.com/CGI/main.js"></script>
+</html>

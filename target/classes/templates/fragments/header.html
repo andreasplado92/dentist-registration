@@ -1,0 +1,23 @@
+<head th:fragment="header">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Hambaarst</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <li><a href="/registration">Registreeru</a></li>
+                    <li><a href="/results">Broneeritud ajad</a></li>
+                </ul>
+            </ul>
+            <div class="input-group col-sm-4 pull-right search_wrapper_top">
+                <input type="text" class="form-control searchbox" placeholder="Otsi hambaarsti" th:value="${dentistName}"></input>
+                <div class="input-group-btn">
+                    <button class="btn btn-default searchbtn" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</head>
